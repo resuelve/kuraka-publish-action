@@ -1,0 +1,16 @@
+name: CI
+
+on: push
+
+jobs:
+  run-linters:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v3
+
+      - name: Install shellcheck
+        run: sudo apt update && sudo apt install shellcheck --yes
+
+      - name: Run shellcheck
+        run: shellcheck entrypoint.sh

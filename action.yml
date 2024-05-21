@@ -1,0 +1,22 @@
+---
+name: "Update kubernetes deployment image"
+description: "Update kubernetes deployment image"
+inputs:
+  project:
+    description: "Project code"
+    required: true
+  environment:
+    description: "Environment name"
+    required: true
+  image_version:
+    description: "Docker image tag name, {org}/{repo}:{tag}"
+    required: true
+  url:
+    description: "Publish endpoint, for example {host}/api/deployments"
+    required: true
+  token:
+    description: "Authentication token to be able to publish deployments"
+    required: true
+runs:
+  using: "docker"
+  image: "Dockerfile"
