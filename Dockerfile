@@ -1,7 +1,5 @@
-FROM alpine:3.19
+FROM python:3.12-alpine
 
-RUN apk --update add curl bash
+COPY main.py /main.py
 
-COPY entrypoint.sh /entrypoint.sh
-
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["/main.py"]

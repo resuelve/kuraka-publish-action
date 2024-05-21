@@ -1,3 +1,4 @@
+---
 name: CI
 
 on: push
@@ -5,12 +6,13 @@ on: push
 jobs:
   run-linters:
     runs-on: ubuntu-latest
+    container: python:3.12-alpine
     steps:
       - name: Check out the repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Install shellcheck
-        run: sudo apt update && sudo apt install shellcheck --yes
-
-      - name: Run shellcheck
-        run: shellcheck entrypoint.sh
+      - name: Run linter and formatter with ruff
+        run: |
+          pip install ruff
+          ruff format --check .
+          ruff check --output-format github .
