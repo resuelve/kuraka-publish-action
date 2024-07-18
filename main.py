@@ -31,8 +31,10 @@ def main():
     try:
         with urlopen(request) as response:
             if response.status == 201:
+                uid = response.read().decode().strip()
+                deployment_url = uri.geturl().replace(uri.path, f"/deployments/{uid}")
                 sys.stdout.write(
-                    f"Deployment created with uid: {response.read().decode()}\n"
+                    f"Deployment created with uid: {uid}, your can see its details in {deployment_url}\n"
                 )
     except HTTPError as error:
         sys.stderr.write(f"HTTP Error: {error.reason} {error.read().decode()}")
